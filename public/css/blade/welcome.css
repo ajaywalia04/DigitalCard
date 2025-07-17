@@ -1,0 +1,50 @@
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f8fafc;
+    color: #1f2937;
+    line-height: 1.6;
+}
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+.header-gradient {
+    background: linear-gradient(to right, #4f46e5, #7c3aed);
+}
+.hero-gradient {
+    background: linear-gradient(to right, #6366f1, #8b5cf6);
+}
+.contact-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #e0e7ff;
+    color: #4f46e5;
+    font-size: 1.5rem;
+    margin-right: 1rem;
+    flex-shrink: 0;
+}
+.showcase-card {
+    max-width: 350px;
+    width: 100%;
+    margin: 0 auto;
+    transform: rotate(-3deg);
+    transition: transform 0.5s ease-in-out;
+}
+.showcase-card:hover {
+    transform: rotate(0deg) scale(1.03);
+}
+.showcase-card .profile-img {
+    width: 80px;
+    height: 80px;
+    border-width: 3px;
+}
+.showcase-card .icon {
+    width: 18px;
+    margin-right: 6px;
+    font-size: 1.2rem;
+}

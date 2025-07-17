@@ -1,0 +1,114 @@
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f8fafc;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+.header-gradient {
+    background: linear-gradient(to right, #4f46e5, #7c3aed);
+}
+.dashboard-main {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 0;
+}
+@media (min-width: 768px) {
+    .dashboard-main {
+        flex-direction: row;
+    }
+}
+.sidebar {
+    width: 100%;
+    background-color: #ffffff;
+    border-right: 1px solid #e2e8f0;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+@media (min-width: 768px) {
+    .sidebar {
+        min-width: 250px;
+        max-width: 250px;
+        height: auto;
+    }
+}
+.main-content {
+    flex-grow: 1;
+    background-color: #f8fafc;
+    padding: 20px;
+}
+.sidebar-menu li a {
+    display: block;
+    padding: 10px 15px;
+    border-radius: 8px;
+    color: #4b5563;
+    font-weight: 500;
+    transition: all 0.2s ease-in-out;
+}
+.sidebar-menu li a:hover {
+    background-color: #e0e7ff;
+    color: #4f46e5;
+}
+.sidebar-menu li a.active {
+    background-color: #4f46e5;
+    color: #ffffff;
+}
+.faq-item {
+    background-color: #ffffff;
+    padding: 1.25rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+.faq-item:hover {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.faq-question {
+    font-weight: 600;
+    color: #1f2937;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.faq-answer {
+    margin-top: 0.75rem;
+    color: #4b5563;
+    display: none;
+}
+.faq-answer.show {
+    display: block;
+}
+.faq-arrow {
+    transition: transform 0.2s ease-in-out;
+}
+.faq-arrow.rotate {
+    transform: rotate(180deg);
+}
+.main-content input[type="text"],
+.main-content input[type="email"],
+.main-content textarea {
+    @apply mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition-all duration-200;
+}
+.main-content label {
+    @apply block text-sm font-medium text-gray-700 text-left mb-1;
+}
+.alert-success {
+    background-color: #d1fae5;
+    color: #065f46;
+    border: 1px solid #34d399;
+}
+.alert-warning {
+    background-color: #fffbeb;
+    color: #92400e;
+    border: 1px solid #fcd34d;
+}
