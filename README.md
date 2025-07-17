@@ -55,7 +55,7 @@ DB_USERNAME=your_db_username
 DB_PASSWORD=your_db_password
 
 Build Frontend Assets:
-Compile your CSS and JavaScript assets. If you are using Tailwind CSS, this step is particularly important to process your utility classes.
+Compile your CSS and JavaScript assets. this step is particularly important to processs utility classes.
 
 npm run build-css
 
