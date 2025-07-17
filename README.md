@@ -1,3 +1,4 @@
+
 Digital Card Project
 Project Overview
 The Digital Card project is a modern web application designed to revolutionize professional networking. It allows users to create, customize, share, and manage digital business cards effortlessly. Moving beyond traditional paper cards, Digital Card offers an interactive and eco-friendly solution for exchanging contact information.
@@ -16,11 +17,10 @@ Installation Guide
 Follow these steps to set up and run the Digital Card project on your local machine.
 
 Step-by-Step Installation
-Clone the Repository:
-First, clone the project repository to your local machine:
+Download the Repository:
+First, download the project repository to your local machine:
 
-git clone [your-repository-url] digital-card
-cd digital-card
+Go to the develop branch to download the code
 
 Install PHP Dependencies (Composer):
 Install the necessary PHP packages using Composer:
