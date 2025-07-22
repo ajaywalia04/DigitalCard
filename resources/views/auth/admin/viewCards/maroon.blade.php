@@ -108,7 +108,7 @@
             <div class="card-display-container bg-white rounded-xl shadow-2xl overflow-hidden relative">
                 <div class="relative bg-red-800 h-32 flex items-center justify-center">
                     <?php
-                        $initials = strtoupper(collect(explode(' ', trim($mycard->fullname)))
+                        $initials = strtoupper(collect(explode(' ', trim($myCard->full_name)))
                                 ->take(2)
                                 ->map(fn($word) => $word[0])
                                 ->implode(''));
@@ -117,26 +117,26 @@
                 </div>
 
                 <div class="text-center pt-16 pb-8 px-6">
-                    <h1 class="text-3xl font-bold text-gray-900 mb-2">{{ $mycard->fullname}}</h1>
-                    <p class="text-lg text-red-700 font-medium mb-2">{{ $mycard->job_title}}</p>
-                    <p class="text-md text-gray-700 font-semibold mb-2">{{ $mycard->department }}</p>
-                    <p class="text-md text-gray-800 font-semibold mb-4">{{ $mycard->company_name}}</p>
+                    <h1 class="text-3xl font-bold text-gray-900 mb-2">{{ $myCard->full_name}}</h1>
+                    <p class="text-lg text-red-700 font-medium mb-2">{{ $myCard->job_title}}</p>
+                    <p class="text-md text-gray-700 font-semibold mb-2">{{ $myCard->department }}</p>
+                    <p class="text-md text-gray-800 font-semibold mb-4">{{ $myCard->company_name}}</p>
                     <p class="text-gray-600 text-sm leading-relaxed mb-6">
-                        {{ $mycard->bio }}
+                        {{ $myCard->bio }}
                     </p>
 
                     <div class="space-y-3 text-left max-w-xs mx-auto">
                         <div class="flex items-center text-gray-700">
                             <span class="card-display-icon">&#9993;</span>
-                            <span class="text-red-700">{{ $mycard->email }}</span>
+                            <span class="text-red-700">{{ $myCard->email }}</span>
                         </div>
                         <div class="flex items-center text-gray-700">
                             <span class="card-display-icon">&#128222;</span>
-                            <span class="text-red-700">+91 {{ $mycard->phone_no}}</span>
+                            <span class="text-red-700">+91 {{ $myCard->phone_no}}</span>
                         </div>
                         <div class="flex items-center text-gray-700">
                             <span class="card-display-icon">&#128205;</span>
-                            <span class="text-gray-600">{{ $mycard->company_address}}</span>
+                            <span class="text-gray-600">{{ $myCard->company_address}}</span>
                         </div>
                     </div>
                 </div>
@@ -146,10 +146,10 @@
             </div>
 
             <div class="flex flex-col sm:flex-row justify-center gap-4 mt-6">
-                <a href="{{url('/').'/m/'.$mycard->slug}}"  target="_blank" class="bg-white text-indigo-700 px-8 py-4 rounded-full font-bold shadow-lg hover:bg-gray-100 transition-transform transform hover:scale-105 duration-300">
+                <a href="{{url('/').'/m/'.$myCard->slug}}"  target="_blank" class="bg-white text-indigo-700 px-8 py-4 rounded-full font-bold shadow-lg hover:bg-gray-100 transition-transform transform hover:scale-105 duration-300">
                     Share My Card
                 </a>
-                <a href="https://wa.me/?text={{ urlencode('Check out my digital card: ' . url('/').'/m/'.$mycard->slug) }}" target="_blank" class="bg-green-500 text-white px-8 py-4 rounded-full font-bold shadow-lg hover:bg-green-600 transition-transform transform hover:scale-105 duration-300 flex items-center justify-center">
+                <a href="https://wa.me/?text={{ urlencode('Check out my digital card: ' . url('/').'/m/'.$myCard->slug) }}" target="_blank" class="bg-green-500 text-white px-8 py-4 rounded-full font-bold shadow-lg hover:bg-green-600 transition-transform transform hover:scale-105 duration-300 flex items-center justify-center">
                     <svg class="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M12.04 2C7.03 2 3 6.03 3 11.04c0 1.78.5 3.45 1.37 4.93L3.5 21.5l5.7-1.5c1.47.87 3.14 1.37 4.93 1.37C17.05 21.04 21 17.01 21 12.04 21 7.03 16.97 2 12.04 2zM16.5 14.5c-.2-.1-.8-.4-1.1-.5-.3-.1-.5-.1-.7.1s-.8.9-1 .9c-.2 0-.4-.1-.6-.2-.2-.1-.8-.3-1.5-.9-.6-.5-1-1.2-1.2-1.6-.1-.2 0-.3.1-.4.1-.1.2-.2.3-.3.1-.1.2-.2.3-.3.1-.1.1-.2 0-.3-.1-.1-.7-1.7-.9-2.3-.2-.6-.4-.5-.6-.5h-.4c-.2 0-.5.1-.7.2-.2.1-.8.8-.8 1.9s.8 2.2.9 2.4c.1.2 1.6 2.5 3.9 3.5 2.3 1 2.9.8 3.4.7.5-.1 1.2-.5 1.4-.8.2-.3.2-.5.1-.7z"/>
                     </svg>
@@ -158,7 +158,7 @@
             </div>
             <div class="bg-white p-6 rounded-lg shadow-sm mt-8 text-center">
                 <h2 class="text-2xl font-semibold text-gray-800 mb-4">Scan to Share</h2>
-                <img src="{{ asset('storage/qrcodes/card-' . $mycard->uuid . '.png') }}" alt="QR Code to share business card" class="mx-auto rounded-lg shadow-md" width="100" height="100">
+                <img src="{{ asset('storage/qrcodes/card-' . $myCard->uuid . '.png') }}" alt="QR Code to share business card" class="mx-auto rounded-lg shadow-md" width="100" height="100">
                 <p class="text-gray-600 text-sm mt-4">Scan this QR code to quickly share your digital business card.</p>
             </div>
         </main>

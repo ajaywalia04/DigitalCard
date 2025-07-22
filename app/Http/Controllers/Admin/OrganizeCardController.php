@@ -9,35 +9,35 @@ use Illuminate\Support\Facades\Auth;
 
 class OrganizeCardController extends Controller
 {
-    public function create(MyCard $mycard)
+    public function create(MyCard $myCard)
     {
-        $user = Auth::user()->load('tag','category','cardnote');
-        $mycard = $mycard->load(['tag','category','cardNotes' => function ($query) use ($user) {
+        $user = Auth::user()->load('tags','categories');
+        $myCard = $myCard->load(['tags','categories','cardNotes' => function ($query) use ($user) {
                          $query->where('user_id', $user->id);
             }]);
-        $tagIds = $mycard->tag->pluck('id')->toArray();
-        $categoryIds = optional($mycard->category->first())->id;
-        return view('auth.admin.organize-card', compact('mycard','user','tagIds','categoryIds'));
+        $tagIds = $myCard->tags->pluck('id')->toArray();
+        $categoryId = optional($myCard->categories->first())->id;
+        return view('auth.admin.organize-card', compact('myCard','user','tagIds','categoryId'));
     }
 
-    public function store(OrganizeCardRequest $request,Mycard $mycard)
+    public function store(OrganizeCardRequest $request,Mycard $myCard)
     {
         $request->validated();
         $user = Auth::user();
-        $user->cardnote()->updateOrCreate(
+        $user->cardNotes()->updateOrCreate(
             [
-            'my_card_id'    => $mycard->id
+            'my_card_id'    => $myCard->id
             ],
             [
                 'note'=> $request->notes,
             ]);
 
 
-        $mycard->tag()->sync($request->tags);
+        $myCard->tags()->sync($request->tags);
 
-        $mycard->category()->sync($request->category);
+        $myCard->categories()->sync($request->category);
 
-        return redirect()->route('admin.dashboard.shared.card.view')
+        return redirect()->route('dashboard.shared.card.view')
             ->with('success', 'Assigned successfully!');
     }
 }

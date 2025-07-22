@@ -16,7 +16,7 @@ class TagController extends Controller
     public function view()
     {
         $user = Auth::user();
-        $tags = $user->tag;
+        $tags = $user->tags;
         return view('auth.admin.tag',compact('tags'));
     }
 
@@ -30,11 +30,11 @@ class TagController extends Controller
     {
         $request->validated();
         $user = Auth::user();
-        $user->tag()->create([
+        $user->tags()->create([
             'name'    => $request->name,
         ]);
 
-        return redirect()->route('admin.dashboard.tag.view')
+        return redirect()->route('dashboard.tag.view')
             ->with('success', 'Tag created successfully!');
     }
 
@@ -50,7 +50,7 @@ class TagController extends Controller
             'name'    => $request->name,
         ]);
 
-        return redirect()->route('admin.dashboard.tag.view')
+        return redirect()->route('dashboard.tag.view')
             ->with('success', 'Tag updated successfully!');
     }
 }

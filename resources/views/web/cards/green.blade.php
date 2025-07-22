@@ -6,8 +6,8 @@
     <title>Digital Business Card</title>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <meta property="og:title" content="{{ $mycard->fullname }} - Digital Business Card">
-    <meta property="og:description" content="View {{ $mycard->fullname }}'s professional digital card.">
+    <meta property="og:title" content="{{ $myCard->full_name }} - Digital Business Card">
+    <meta property="og:description" content="View {{ $myCard->full_name }}'s professional digital card.">
     <meta property="og:url" content="{{ url()->current() }}">
     <meta property="og:type" content="website">
     <style>
@@ -49,7 +49,7 @@
         @endif
         <div class="relative bg-green-700 h-32 flex items-center justify-center">
             <?php
-                $initials = strtoupper(collect(explode(' ', trim($mycard->fullname)))
+                $initials = strtoupper(collect(explode(' ', trim($myCard->full_name)))
                         ->take(2)
                         ->map(fn($word) => $word[0])
                         ->implode(''));
@@ -58,29 +58,29 @@
         </div>
 
         <div class="text-center pt-16 pb-8 px-6">
-            <h1 class="text-3xl font-bold text-gray-900 mb-2">{{ $mycard->fullname}}</h1>
-            <p class="text-lg text-green-600 font-medium mb-2">{{ $mycard->job_title}}</p>
-            <p class="text-md text-gray-700 font-semibold mb-2">{{ $mycard->department }}</p>
-            <p class="text-md text-gray-800 font-semibold mb-4">{{ $mycard->company_name}}</p>
-            <p class="text-gray-600 text-sm leading-relaxed mb-6"> {{ $mycard->bio }} </p>
+            <h1 class="text-3xl font-bold text-gray-900 mb-2">{{ $myCard->full_name}}</h1>
+            <p class="text-lg text-green-600 font-medium mb-2">{{ $myCard->job_title}}</p>
+            <p class="text-md text-gray-700 font-semibold mb-2">{{ $myCard->department }}</p>
+            <p class="text-md text-gray-800 font-semibold mb-4">{{ $myCard->company_name}}</p>
+            <p class="text-gray-600 text-sm leading-relaxed mb-6"> {{ $myCard->bio }} </p>
 
             <div class="space-y-3 text-left max-w-xs mx-auto">
                 <div class="flex items-center text-gray-700">
                     <span class="icon">&#9993;</span>
-                    <a href="mailto:jane.doe@example.com" class="text-green-600 hover:text-green-800 transition-colors duration-200">{{ $mycard->email }}</a>
+                    <a href="mailto:jane.doe@example.com" class="text-green-600 hover:text-green-800 transition-colors duration-200">{{ $myCard->email }}</a>
                 </div>
                 <div class="flex items-center text-gray-700">
                     <span class="icon">&#128222;</span>
-                    <a href="tel:+1234567890" class="text-green-600 hover:text-green-800 transition-colors duration-200">+91 {{ $mycard->phone_no}}</a>
+                    <a href="tel:+1234567890" class="text-green-600 hover:text-green-800 transition-colors duration-200">+91 {{ $myCard->phone_no}}</a>
                 </div>
                 <div class="flex items-center text-gray-700">
                     <span class="icon">&#128205;</span>
-                    <span class="text-gray-600">{{ $mycard->company_address}}</span>
+                    <span class="text-gray-600">{{ $myCard->company_address}}</span>
                 </div>
             </div>
         </div>
         <div class="px-6 pb-6 pt-4">
-            <form method="Post" action="{{ route('my.card.accept',['mycard'=>$mycard->slug]) }}">
+            <form method="Post" action="{{ route('my.card.accept',['myCard'=>$myCard->slug]) }}">
                 @csrf
                 <button type="submit" class="w-full bg-green-600 text-white py-3 rounded-md font-semibold hover:bg-green-700 transition-colors duration-200 shadow-md mb-2">
                     Accept Card

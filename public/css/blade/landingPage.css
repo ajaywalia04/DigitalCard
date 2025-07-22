@@ -1,0 +1,103 @@
+ body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f8fafc; /* Light blue-gray background */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+.header-gradient {
+    background: linear-gradient(to right, #4f46e5, #7c3aed); /* Indigo to Purple */
+}
+.dashboard-main {
+    flex-grow: 1; /* Allows this section to take up remaining vertical space */
+    display: flex;
+    flex-direction: column; /* Stack sidebar and content vertically on small screens */
+    padding: 20px 0;
+}
+@media (min-width: 768px) { /* md breakpoint */
+    .dashboard-main {
+        flex-direction: row; /* Side-by-side on larger screens */
+    }
+}
+.sidebar {
+    width: 100%; /* Full width on small screens */
+    background-color: #ffffff;
+    border-right: 1px solid #e2e8f0;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    /* Added margin-bottom for spacing on mobile when stacked */
+    margin-bottom: 1.5rem;
+    border-radius: 0.5rem; /* Rounded corners for sidebar */
+}
+@media (min-width: 768px) {
+    .sidebar {
+        min-width: 250px; /* Fixed width sidebar on larger screens */
+        max-width: 250px;
+        height: auto; /* Adjust height based on content */
+        margin-right: 1.5rem; /* Margin between sidebar and main content on desktop */
+        margin-bottom: 0; /* Reset margin for desktop */
+    }
+}
+.main-content {
+    flex-grow: 1; /* Take remaining width */
+    background-color: #f8fafc; /* Match body background */
+    padding: 20px;
+    border-radius: 0.5rem; /* Rounded corners for main content */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* Shadow for main content */
+}
+.sidebar-menu li a {
+    display: block;
+    padding: 10px 15px;
+    border-radius: 8px;
+    color: #4b5563; /* Gray-700 */
+    font-weight: 500;
+    transition: all 0.2s ease-in-out;
+}
+.sidebar-menu li a:hover {
+    background-color: #e0e7ff;
+    color: #4f46e5;
+}
+.sidebar-menu li a.active {
+    background-color: #4f46e5;
+    color: #ffffff;
+}
+
+/* Styles for form inputs within the dynamically loaded content */
+.main-content input[type="text"],
+.main-content input[type="email"],
+.main-content input[type="tel"],
+.main-content textarea,
+.main-content select,
+.main-content input[type="number"] { /* Added number input */
+    @apply mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition-all duration-200;
+}
+.main-content label {
+    @apply block text-sm font-medium text-gray-700 text-left mb-1;
+}
+
+/* Landing Page Form Specific Styles */
+.landing-page-form-container {
+    max-width: 700px; /* Wider for more inputs */
+    width: 100%;
+    margin: 0 auto; /* Center the form within the main content area */
+}
+
+.alert-success {
+    background-color: #d1fae5;
+    color: #065f46;
+    border: 1px solid #34d399;
+}
+
+.alert-warning {
+    background-color: #fffbeb;
+    color: #92400e;
+    border: 1px solid #fcd34d;
+}

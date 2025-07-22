@@ -18,7 +18,7 @@
             @endif
            <div class="flex items-center justify-between mb-6">
                <h1 class="text-3xl font-bold text-gray-900 mb-6">Manage Your Categories</h1>
-                <a href="{{ route("admin.dashboard.category.create")}}" type="button" class="bg-indigo-600 text-white px-4 py-2 rounded-md font-semibold hover:bg-indigo-700 shadow-sm">
+                <a href="{{ route("dashboard.category.create")}}" type="button" class="bg-indigo-600 text-white px-4 py-2 rounded-md font-semibold hover:bg-indigo-700 shadow-sm">
                     Create
                 </a>
             </div>
@@ -44,7 +44,7 @@
                             <tr>
                                 <td><span class="item-display-text">{{ $category->name}}</span></td>
                                 <td>
-                                        <a href="{{ route('admin.dashboard.category.edit',['category'=>$category->uuid]) }}" class="manage-item-button edit">Edit</button>
+                                        <a href="{{ route('dashboard.category.edit',['category'=>$category->uuid]) }}" class="manage-item-button edit">Edit</button>
                                 </td>
                             </tr>
                             @endforeach

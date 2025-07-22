@@ -24,7 +24,7 @@ class MyCardEditRequest extends FormRequest
     public function rules()
     {
         return [
-            'fullname'    => 'required',
+            'full_name'    => 'required',
             'job_title' => 'required|max:30',
             'department' => 'required|max:30',
             'company_name' =>'required|max:30',

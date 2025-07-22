@@ -13,7 +13,7 @@
         <main id="dashboardMainContent" class="main-content rounded-lg shadow-md">
            <div class="flex items-center justify-between mb-6">
                <h1 class="text-3xl font-bold text-gray-900 mb-6">Manage Your Categories</h1>
-                <a href="{{ route("admin.dashboard.category.view")}}" type="button" class="bg-indigo-600 text-white px-4 py-2 rounded-md font-semibold hover:bg-indigo-700 shadow-sm">
+                <a href="{{ route("dashboard.category.view")}}" type="button" class="bg-indigo-600 text-white px-4 py-2 rounded-md font-semibold hover:bg-indigo-700 shadow-sm">
                     Back
                 </a>
             </div>
@@ -23,7 +23,7 @@
 
             <div class="bg-white p-6 rounded-lg shadow-sm">
                 <h2 class="text-2xl font-semibold text-gray-800 mb-4">Edit Category</h2>
-                <form action="{{ route('admin.dashboard.category.update',['category'=>$category->uuid]) }}" method="POST" id="addCategoryForm" class="flex flex-col sm:flex-row gap-2 mt-4">
+                <form action="{{ route('dashboard.category.update',['category'=>$category->uuid]) }}" method="POST" id="addCategoryForm" class="flex flex-col sm:flex-row gap-2 mt-4">
                     @csrf
                     <input type="text" id="newGlobalCategoryInput" required name="name" value="{{ old('name', $category->name) }}"  placeholder="Edit category" class="flex-grow px-3 py-2 border border-gray-300 rounded-md shadow-sm">
                     <button type="submit" class="bg-indigo-600 text-white px-4 py-2 rounded-md font-semibold hover:bg-indigo-700">Edit Category</button>

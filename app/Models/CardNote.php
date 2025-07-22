@@ -10,7 +10,8 @@ use Illuminate\Support\Str;
 class CardNote extends Model
 {
     use HasFactory;
-    protected $guarded=[];
+
+    protected $fillable = ['note','my_card_id'];
 
 
     public static function boot(){

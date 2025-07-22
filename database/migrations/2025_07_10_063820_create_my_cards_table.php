@@ -17,7 +17,7 @@ class CreateMyCardsTable extends Migration
             $table->id();
             $table->uuid('uuid')->unique(); // UUID
             $table->unsignedBigInteger('user_id');
-            $table->string('fullname');
+            $table->string('full_name');
             $table->string('email')->unique();
             $table->string('job_title')->nullable();
             $table->string('department')->nullable();

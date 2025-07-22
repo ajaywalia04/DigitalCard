@@ -17,19 +17,19 @@ class SharedCardController extends Controller
 
         $search = $request->input('search');
 
-        $sharedCards = $user->sharedcard()
-            ->whereHas('mycard', function ($query) use ($search) {
+        $sharedCards = $user->sharedCards()
+            ->whereHas('myCard', function ($query) use ($search) {
                 if (!empty($search)) {
                     $query->where(function ($q) use ($search) {
-                        $q->where('fullname', 'like', "%$search%")
+                        $q->where('full_name', 'like', "%$search%")
                           ->orWhere('company_name', 'like', "%$search%")
                           ->orWhere('job_title', 'like', "%$search%")
                           ->orWhere('department', 'like', "%$search%");
                     });
                 }
             })
-            ->with(['mycard.tag','mycard.category',
-                    'mycard.cardNotes' => function ($query) use ($user) {
+            ->with(['myCard.tags','myCard.categories',
+                    'myCard.cardNotes' => function ($query) use ($user) {
                          $query->where('user_id', $user->id);
             }])
             ->latest()
@@ -38,18 +38,18 @@ class SharedCardController extends Controller
         return view('auth.admin.shared-card', compact('sharedCards', 'search', 'user'));
     }
 
-    public function acceptCard(Request $request, MyCard $mycard){
+    public function acceptCard(Request $request, MyCard $myCard){
         if (auth()->check()) {
             // User is logged in
             $user = auth()->user();
             $shared = SharedCard::where('user_id', $user->id)
-                    ->where('mycard_id', $mycard->id)
+                    ->where('my_card_id', $myCard->id)
                     ->first();
             if($shared){
                 return redirect()->back()->with('success','Card is already exists');
             }else{
-                $shared = $user->sharedcard()->create([
-                    'mycard_id'       => $mycard->id,
+                $shared = $user->sharedCards()->create([
+                    'my_card_id'       => $myCard->id,
                     'device_info'     => $request->userAgent(),
                 ]);
             }
@@ -57,7 +57,7 @@ class SharedCardController extends Controller
 
         } else {
             // User is NOT logged in
-            session(['mycard' => $mycard->uuid]);
+            session(['myCard' => $myCard->uuid]);
             return redirect()->route('show.login.form');
         }
     }

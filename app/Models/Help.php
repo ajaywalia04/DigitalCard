@@ -10,7 +10,8 @@ use Illuminate\Support\Str;
 class Help extends Model
 {
     use HasFactory;
-    protected $guarded=[];
+
+    protected $fillable = ['subject', 'message'];
 
 
     public static function boot(){

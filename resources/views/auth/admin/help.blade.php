@@ -58,7 +58,7 @@
                 <p class="text-gray-700 mb-4">
                     Can't find what you're looking for? Send us a message directly.
                 </p>
-                <form action="{{ route('admin.dashboard.help.submit') }}" method="POST" class="space-y-6">
+                <form action="{{ route('dashboard.help.submit') }}" method="POST" class="space-y-6">
                     @csrf
                     <div>
                         <label for="subject">Subject</label>

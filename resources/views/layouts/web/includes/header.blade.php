@@ -5,7 +5,7 @@
         <nav>
             <ul class="flex space-x-6">
                 @if(auth()->check())
-                    <li><a href="{{ route('admin.dashboard') }}"  class="bg-white text-indigo-600 px-4 py-2 rounded-full font-semibold hover:bg-gray-100 transition-colors duration-200 shadow">Dashboard</a></li>
+                    <li><a href="{{ route('dashboard.view') }}"  class="bg-white text-indigo-600 px-4 py-2 rounded-full font-semibold hover:bg-gray-100 transition-colors duration-200 shadow">Dashboard</a></li>
                 @else
                     <li><a href="{{ route('show.login.form') }}"  class="bg-white text-indigo-600 px-4 py-2 rounded-full font-semibold hover:bg-gray-100 transition-colors duration-200 shadow">Sign In</a></li>
                     <li><a href="{{ route('show.registration.page') }}"  class="bg-blue-600 text-white px-4 py-2 rounded-full font-semibold hover:bg-blue-700 transition-colors duration-200 shadow">Register</a></li>

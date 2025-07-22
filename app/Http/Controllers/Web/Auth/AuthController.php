@@ -34,7 +34,7 @@ class AuthController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials,$request->filled('remember_me'))) {
-            if (session()->has('mycard')) {
+            if (session()->has('myCard')) {
                 SharedCard::storeDataIfUserNotLoggedIn();
             }
             return redirect(RouteServiceProvider::HOME);
@@ -62,7 +62,7 @@ class AuthController extends Controller
         Mail::to($user->email)->send(new RegisterMail($user));
 
         Auth::login($user);
-        if (session()->has('mycard')) {
+        if (session()->has('myCard')) {
             SharedCard::storeDataIfUserNotLoggedIn();
         }
         return redirect(RouteServiceProvider::HOME);

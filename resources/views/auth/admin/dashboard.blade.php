@@ -21,7 +21,7 @@
                 <h2 class="text-2xl font-semibold text-gray-800 mb-4">My Digital Card Overview</h2>
                 <p class="text-gray-600">
                     Your digital presence is active!
-                    @if($user->mycard)
+                    @if($user->myCard)
                     <span> You currently have <strong> digital business card</strong>. </span>
                     You can easily update its details or share it with others.
                     @else
@@ -29,16 +29,21 @@
                     @endif
                 </p>
                 <div class="mt-6 flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4">
-                    @if($user->mycard)
-                        <a href="{{ route('admin.dashboard.card.view') }}" class="bg-indigo-600 text-white px-6 py-3 rounded-md font-semibold hover:bg-indigo-700 transition-colors duration-200 shadow-md">
+                    @if($user->myCard)
+                        <a href="{{ route('dashboard.card.view') }}" class="bg-indigo-600 text-white px-6 py-3 rounded-md font-semibold hover:bg-indigo-700 transition-colors duration-200 shadow-md">
                             View My Card
                         </a>
-                        <a href="{{ route('admin.dashboard.card.edit',['mycard'=>$user->mycard->uuid]) }}" class="bg-green-500 text-white px-6 py-3 rounded-md font-semibold hover:bg-green-600 transition-colors duration-200 shadow-md">
+                        <a href="{{ route('dashboard.card.edit',['myCard'=>$user->myCard->uuid]) }}" class="bg-green-500 text-white px-6 py-3 rounded-md font-semibold hover:bg-green-600 transition-colors duration-200 shadow-md">
                             Edit My Card
                         </a>
                     @else
-                        <a href="{{ route('admin.dashboard.card.create') }}" id="createMyCardBtn" class="bg-indigo-600 text-white px-6 py-3 rounded-md font-semibold hover:bg-indigo-700 transition-colors duration-200 shadow-md">
+                        <a href="{{ route('dashboard.card.create') }}" id="createMyCardBtn" class="bg-indigo-600 text-white px-6 py-3 rounded-md font-semibold hover:bg-indigo-700 transition-colors duration-200 shadow-md">
                             Create My Card
+                        </a>
+                    @endif
+                    @if($user->landingPage)
+                        <a href="{{ route('my.landing.view',['slug' => $user->landingPage->slug]) }}" target="_blank" class="bg-indigo-600 text-white px-6 py-3 rounded-md font-semibold hover:bg-indigo-700 transition-colors duration-200 shadow-md">
+                            View Landing Page
                         </a>
                     @endif
                 </div>
@@ -68,10 +73,10 @@
                 @foreach ($sharedCards as $shared)
                     <div class="mt-4 border border-gray-200 rounded-md p-4 flex items-center justify-between">
                         <div>
-                            <p class="font-semibold text-gray-800">{{ $shared->mycard->fullname }} - {{ $shared->mycard->job_title }}</p>
-                            <p class="text-sm text-gray-600">{{ $shared->mycard->email }}</p>
+                            <p class="font-semibold text-gray-800">{{ $shared->myCard->full_name }} - {{ $shared->myCard->job_title }}</p>
+                            <p class="text-sm text-gray-600">{{ $shared->myCard->email }}</p>
                         </div>
-                        <a href="{{url('/').'/m/'.$shared->mycard->slug}}" target="_blank" class="bg-blue-500 text-white px-4 py-2 rounded-md text-sm hover:bg-blue-600 transition-colors duration-200">
+                        <a href="{{url('/').'/m/'.$shared->myCard->slug}}" target="_blank" class="bg-blue-500 text-white px-4 py-2 rounded-md text-sm hover:bg-blue-600 transition-colors duration-200">
                             View Card
                         </a>
                     </div>

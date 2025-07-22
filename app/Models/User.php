@@ -61,33 +61,53 @@ class User extends Authenticatable
     #      Relation
     ######################################################################
 
-    public function mycard(){
+    public function myCard(){
         return $this->hasOne(MyCard::class);
     }
 
-    public function sharedcard()
+    public function sharedCards()
     {
         return $this->hasMany(SharedCard::class);
     }
 
-    public function cardnote()
+    public function cardNotes()
     {
         return $this->hasMany(CardNote::class);
     }
 
-    public function tag()
+    public function tags()
     {
         return $this->hasMany(Tag::class);
     }
 
-    public function category()
+    public function categories()
     {
         return $this->hasMany(Category::class);
     }
 
-    public function help()
+    public function helps()
     {
         return $this->hasMany(Help::class);
+    }
+
+    public function socialMedias()
+    {
+        return $this->hasMany(SocialMedia::class);
+    }
+
+    public function landingPage()
+    {
+        return $this->hasOne(LandingPage::class);
+    }
+
+    public function landingServices()
+    {
+        return $this->hasMany(LandingService::class);
+    }
+
+    public function landingContactUs()
+    {
+        return $this->hasMany(LandingContactUs::class);
     }
 
     ######################################################################

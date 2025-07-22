@@ -18,7 +18,7 @@ class HelpController extends Controller
     public function submitHelp(HelpRequest $request){
         $request->validated();
         $user = Auth::user();
-        $user->help()->create([
+        $user->helps()->create([
             'subject'=>$request->subject,
             'message'=>$request->message,
         ]);

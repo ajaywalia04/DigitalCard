@@ -8,14 +8,14 @@ use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
-    public function show()
+    public function view()
     {
         $user = Auth::user();
         // 1. Cards this user accepted
-        $cardsAcceptedCount = $user->sharedcard()->count();
+        $cardsAcceptedCount = $user->sharedCards()->count();
         // 2. User's cards accepted by others
-        $cardsAcceptedByOthersCount = SharedCard::where('mycard_id', optional($user->mycard)->id)->count();
-        $sharedCards = $user->sharedcard()->with('mycard')->latest()->take(2)->get();
+        $cardsAcceptedByOthersCount = SharedCard::where('my_card_id', optional($user->myCard)->id)->count();
+        $sharedCards = $user->sharedCards()->with('myCard')->latest()->take(2)->get();
         return view('auth.admin.dashboard', compact('user','sharedCards','cardsAcceptedCount','cardsAcceptedByOthersCount'));
     }
 

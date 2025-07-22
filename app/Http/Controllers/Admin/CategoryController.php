@@ -16,7 +16,7 @@ class CategoryController extends Controller
     public function view()
     {
         $user = Auth::user();
-        $categories = $user->category;
+        $categories = $user->categories;
         return view('auth.admin.category', compact('categories'));
     }
 
@@ -30,11 +30,11 @@ class CategoryController extends Controller
     {
         $request->validated();
         $user = Auth::user();
-        $user->category()->create([
+        $user->categories()->create([
             'name'    => $request->name,
         ]);
 
-        return redirect()->route('admin.dashboard.category.view')
+        return redirect()->route('dashboard.category.view')
             ->with('success', 'Category created successfully!');
     }
 
@@ -49,7 +49,7 @@ class CategoryController extends Controller
             'name'    => $request->name,
         ]);
 
-        return redirect()->route('admin.dashboard.category.view')
+        return redirect()->route('dashboard.category.view')
             ->with('success', 'Category updated successfully!');
     }
 }

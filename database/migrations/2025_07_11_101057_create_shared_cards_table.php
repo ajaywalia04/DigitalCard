@@ -16,7 +16,7 @@ class CreateSharedCardsTable extends Migration
         Schema::create('shared_cards', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('mycard_id'); // want to edit
+            $table->unsignedBigInteger('my_card_id'); // want to edit
             $table->string('device_info')->nullable();
             $table->timestamps();
         });

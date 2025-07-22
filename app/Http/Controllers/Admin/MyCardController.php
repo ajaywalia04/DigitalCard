@@ -11,9 +11,9 @@ use Illuminate\Support\Facades\Auth;
 class MyCardController extends Controller
 {
     public function index($slug){
-        $mycard = MyCard::where('slug',$slug)->first();
-        if($mycard){
-            return view('web.cards.'.$mycard->card_no, compact('mycard'));
+        $myCard = MyCard::where('slug',$slug)->first();
+        if($myCard){
+            return view('web.cards.'.$myCard->card_no, compact('myCard'));
         }
         return redirect()->route('home.page')->with('error','The card does not exist or the link is invalid.');
     }
@@ -21,17 +21,17 @@ class MyCardController extends Controller
     public function view()
     {
         $user = Auth::user();
-        $mycard = $user->mycard;
+        $myCard = $user->myCard;
         MyCard::createQrCode();
 
-        return view('auth.admin.viewCards.'.$mycard->card_no, compact('mycard'));
+        return view('auth.admin.viewCards.'.$myCard->card_no, compact('myCard'));
     }
 
     public function create()
     {
         $user = Auth::user();
-        if($user->mycard){
-           return redirect()->route('admin.dashboard');
+        if($user->myCard){
+           return redirect()->route('dashboard.view');
         }
         return view('auth.admin.create-new-card', compact('user'));
     }
@@ -40,8 +40,8 @@ class MyCardController extends Controller
     {
         $request->validated();
         $user = Auth::user();
-        $user->mycard()->create([
-            'fullname'    => $request->fullname,
+        $user->myCard()->create([
+            'full_name'    => $request->full_name,
             'job_title' => $request->job_title,
             'department' => $request->department,
             'company_name' =>$request->company_name,
@@ -54,30 +54,30 @@ class MyCardController extends Controller
 
         MyCard::createQrCode();
 
-        return redirect()->route('admin.dashboard.card.view')
+        return redirect()->route('dashboard.card.view')
             ->with('success', 'Card created successfully!');
     }
 
-    public function edit(Mycard $mycard)
+    public function edit(Mycard $myCard)
     {
-        return view('auth.admin.edit-card', compact('mycard'));
+        return view('auth.admin.edit-card', compact('myCard'));
     }
 
-    public function update(MyCardEditRequest $request, Mycard $mycard){
+    public function update(MyCardEditRequest $request, Mycard $myCard){
         $request->validated();
-        $mycard->update([
-            'fullname'    => $request->fullname,
+        $myCard->update([
+            'full_name'    => $request->full_name,
             'job_title' => $request->job_title,
             'department' => $request->department,
             'company_name' =>$request->company_name,
-            'phone_no' => $mycard->phone_no,
+            'phone_no' => $myCard->phone_no,
             'company_address' => $request->company_address,
             'bio' => $request->bio,
             'card_no' => $request->card_no,
-            'email'=> $mycard->email,
+            'email'=> $myCard->email,
         ]);
 
-        return redirect()->route('admin.dashboard.card.view')
+        return redirect()->route('dashboard.card.view')
             ->with('success', 'Card updated successfully!');
     }
 }

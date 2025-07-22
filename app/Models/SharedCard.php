@@ -11,7 +11,12 @@ use Illuminate\Support\Str;
 class SharedCard extends Model
 {
     use HasFactory;
-    protected $guarded=[];
+
+    protected $fillable = [
+        'user_id',
+        'my_card_id',
+        'device_info',
+    ];
 
     protected $appends = ['browser','operating_system','device_type'];
 
@@ -24,7 +29,7 @@ class SharedCard extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function mycard()
+    public function myCard()
     {
         return $this->belongsTo(MyCard::class);
     }
@@ -34,16 +39,16 @@ class SharedCard extends Model
 ##########################################################
 
     public static function storeDataIfUserNotLoggedIn(){
-        $mycard = MyCard::where('uuid',session()->pull('mycard'))->first();
+        $myCard = MyCard::where('uuid',session()->pull('myCard'))->first();
         $user = auth()->user();
         $shared = SharedCard::where('user_id', $user->id)
-                ->where('mycard_id', $mycard->id)
+                ->where('my_card_id', $myCard->id)
                 ->first();
         if($shared){
 
         }else{
-            $shared = $user->sharedcard()->create([
-                'mycard_id'       => $mycard->id,
+            $shared = $user->sharedCards()->create([
+                'my_card_id'       => $myCard->id,
                 'device_info'     => request()->userAgent(),
             ]);
         }

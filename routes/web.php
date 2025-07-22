@@ -10,6 +10,9 @@ use App\Http\Controllers\Admin\SharedCardController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\OrganizeCardController;
 use App\Http\Controllers\Admin\TagController;
+use App\Http\Controllers\Admin\LandingPageController;
+use App\Http\Controllers\Admin\SocialMediaController;
+use App\Http\Controllers\Admin\TeamController;
 use App\Http\Controllers\Web\HomeController;
 
 /*
@@ -33,7 +36,9 @@ Route::prefix('')->group(function(){
     Route::get('/privacy', [HomeController::class, 'privacy'])->name('privacy.page');
     Route::get('/terms', [HomeController::class, 'terms'])->name('terms.page');
     Route::get('/m/{slug}', [MyCardController::class, 'index'])->name('my.card.view');
-    Route::post('/my-card/{mycard:slug}', [SharedCardController::class, 'acceptCard'])->name('my.card.accept');
+    Route::get('/l/{slug}', [LandingPageController::class, 'index'])->name('my.landing.view');
+    Route::post('/my-card/{myCard:slug}', [SharedCardController::class, 'acceptCard'])->name('my.card.accept');
+    Route::post('/store-contact-us/{landingPage:uuid}', [LandingPageController::class, 'storeContactUs'])->name('landing.contact.store');
 
 });
 
@@ -59,14 +64,14 @@ Route::controller(AuthController::class)->group(function () {
 ##########################################################
 ##          Dashboard
 ##########################################################
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth'])->name('dashboard.')->group(function () {
     Route::controller(AuthController::class)->group(function () {
         Route::get('logout', 'logout')->name('logout');
     });
 
     Route::prefix('/dashboard')->group(function(){
         Route::controller(DashboardController::class)->group(function () {
-            Route::get('/', 'show')->name('admin.dashboard');
+            Route::get('/', 'view')->name('view');
     });
 
 ##########################################################
@@ -75,27 +80,27 @@ Route::middleware(['auth'])->group(function () {
 
     Route::controller(MyCardController::class)->group(function () {
         Route::prefix('/card')->group(function(){
-            Route::get('/view', 'view')->name('admin.dashboard.card.view');
-            Route::get('/create', 'create')->name('admin.dashboard.card.create');
-            Route::post('/store', 'store')->name('admin.dashboard.card.store');
-            Route::get('/edit/{mycard:uuid}', 'edit')->name('admin.dashboard.card.edit');
-            Route::post('/update/{mycard:uuid}', 'update')->name('admin.dashboard.card.update');
-            Route::post('/delete', 'delete')->name('admin.dashboard.card.delete');
+            Route::get('/view', 'view')->name('card.view');
+            Route::get('/create', 'create')->name('card.create');
+            Route::post('/store', 'store')->name('card.store');
+            Route::get('/edit/{myCard:uuid}', 'edit')->name('card.edit');
+            Route::post('/update/{myCard:uuid}', 'update')->name('card.update');
+            Route::post('/delete', 'delete')->name('card.delete');
         });
     });
 
         Route::controller(SharedCardController::class)->group(function () {
             Route::prefix('/shared-card')->group(function(){
-                Route::get('/', 'view')->name('admin.dashboard.shared.card.view');
+                Route::get('/', 'view')->name('shared.card.view');
             });
         });
 
         Route::controller(OrganizeCardController::class)->group(function () {
             Route::prefix('/organize')->group(function(){
-                Route::get('/create/{mycard:uuid}', 'create')->name('admin.dashboard.orgainze.card.create');
-                Route::post('/store/{mycard:uuid}', 'store')->name('admin.dashboard.orgainze.card.store');
-                Route::get('/edit', 'edit')->name('admin.dashboard.orgainze.card.edit');
-                Route::get('/update', 'update')->name('admin.dashboard.orgainze.card.update');
+                Route::get('/create/{myCard:uuid}', 'create')->name('orgainze.card.create');
+                Route::post('/store/{myCard:uuid}', 'store')->name('orgainze.card.store');
+                Route::get('/edit', 'edit')->name('orgainze.card.edit');
+                Route::get('/update', 'update')->name('orgainze.card.update');
             });
         });
 
@@ -105,11 +110,11 @@ Route::middleware(['auth'])->group(function () {
 
          Route::controller(TagController::class)->group(function () {
             Route::prefix('/tag')->group(function(){
-                Route::get('/view', 'view')->name('admin.dashboard.tag.view');
-                Route::get('/create', 'create')->name('admin.dashboard.tag.create');
-                Route::post('/store', 'store')->name('admin.dashboard.tag.store');
-                Route::get('/edit/{tag:uuid}', 'edit')->name('admin.dashboard.tag.edit');
-                Route::post('/update/{tag:uuid}', 'update')->name('admin.dashboard.tag.update');
+                Route::get('/view', 'view')->name('tag.view');
+                Route::get('/create', 'create')->name('tag.create');
+                Route::post('/store', 'store')->name('tag.store');
+                Route::get('/edit/{tag:uuid}', 'edit')->name('tag.edit');
+                Route::post('/update/{tag:uuid}', 'update')->name('tag.update');
             });
         });
 
@@ -119,11 +124,11 @@ Route::middleware(['auth'])->group(function () {
 
          Route::controller(CategoryController::class)->group(function () {
             Route::prefix('/category')->group(function(){
-                Route::get('/view', 'view')->name('admin.dashboard.category.view');
-                Route::get('/create', 'create')->name('admin.dashboard.category.create');
-                Route::post('/store', 'store')->name('admin.dashboard.category.store');
-                Route::get('/edit/{category:uuid}', 'edit')->name('admin.dashboard.category.edit');
-                Route::post('/update/{category:uuid}', 'update')->name('admin.dashboard.category.update');
+                Route::get('/view', 'view')->name('category.view');
+                Route::get('/create', 'create')->name('category.create');
+                Route::post('/store', 'store')->name('category.store');
+                Route::get('/edit/{category:uuid}', 'edit')->name('category.edit');
+                Route::post('/update/{category:uuid}', 'update')->name('category.update');
             });
         });
 
@@ -132,7 +137,7 @@ Route::middleware(['auth'])->group(function () {
 ##########################################################
         Route::controller(ProfileSettingController::class)->group(function () {
             Route::prefix('/profile')->group(function(){
-                Route::get('/', 'view')->name('admin.dashboard.profile.view');
+                Route::get('/', 'view')->name('profile.view');
             });
         });
 
@@ -142,11 +147,52 @@ Route::middleware(['auth'])->group(function () {
 
         Route::controller(HelpController::class)->group(function () {
             Route::prefix('/help')->group(function(){
-                Route::get('/', 'view')->name('admin.dashboard.help.view');
-                Route::post('/', 'submitHelp')->name('admin.dashboard.help.submit');
+                Route::get('/', 'view')->name('help.view');
+                Route::post('/', 'submitHelp')->name('help.submit');
+            });
+        });
+
+##########################################################
+##          Team
+##########################################################
+        Route::controller(TeamController::class)->group(function () {
+            Route::prefix('/team')->group(function(){
+            });
+        });
+
+##########################################################
+##          LandingPage
+##########################################################
+        Route::controller(LandingPageController::class)->group(function () {
+            Route::prefix('/landing-page')->group(function(){
+                Route::get('/create', 'create')->name('landing.create');
+                Route::post('/store', 'store')->name('landing.store');
+                Route::get('/edit/{landingPage:uuid}', 'edit')->name('landing.edit');
+                Route::post('/update/{landingPage:uuid}', 'update')->name('landing.update');
+
+                Route::get('/view-service', 'viewService')->name('landing.service.view');
+                Route::get('/create-service', 'createService')->name('landing.service.create');
+                Route::post('/store-service', 'storeService')->name('landing.service.store');
+                Route::get('/edit-service/{landingService:uuid}', 'editService')->name('landing.service.edit');
+                Route::post('/update-service/{landingService:uuid}', 'updateService')->name('landing.service.update');
+
+                Route::get('/view-message', 'viewMessage')->name('landing.message.view');
+                Route::get('/show-message/{landingContactUs:uuid}', 'showMessage')->name('landing.message.show');
+
+            });
+        });
+
+##########################################################
+##          SocialMedia
+##########################################################
+        Route::controller(SocialMediaController::class)->group(function () {
+            Route::prefix('/social-media')->group(function(){
+                Route::get('/create', 'create')->name('social.create');
+                Route::post('/store', 'store')->name('social.store');
             });
         });
     });
+
 });
 
 

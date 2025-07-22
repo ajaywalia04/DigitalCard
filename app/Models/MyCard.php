@@ -13,7 +13,18 @@ use Illuminate\Support\Str;
 class MyCard extends Model
 {
     use HasFactory;
-    protected $guarded=[];
+
+    protected $fillable = [
+        'full_name',
+        'email',
+        'job_title',
+        'department',
+        'company_name',
+        'company_address',
+        'bio',
+        'phone_no',
+        'card_no',
+    ];
 
     public static function boot(){
 
@@ -35,7 +46,7 @@ class MyCard extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function Category()
+    public function categories()
     {
         return $this->belongsToMany(Category::class);
     }
@@ -45,7 +56,7 @@ class MyCard extends Model
         return $this->hasMany(CardNote::class);
     }
 
-    public function tag()
+    public function tags()
     {
         return $this->belongsToMany(Tag::class);
     }
@@ -53,10 +64,10 @@ class MyCard extends Model
 
     public static function createQrCode(){
         $user = Auth::user();
-        $filename = 'qrcodes/card-' . $user->mycard->uuid . '.png';
+        $filename = 'qrcodes/card-' . $user->myCard->uuid . '.png';
          if (!Storage::disk('public')->exists($filename)) {
-        $filename = 'qrcodes/card-' . $user->mycard->uuid . '.png';
-        $cardUrl = url('/').'/m/'.$user->mycard->slug;
+        $filename = 'qrcodes/card-' . $user->myCard->uuid . '.png';
+        $cardUrl = url('/').'/m/'.$user->myCard->slug;
         $qrUrl = 'https://api.qrserver.com/v1/create-qr-code/?data=' . urlencode($cardUrl) . '&size=200x200';
 
         // Download QR code from API
